@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Exponent",
+      "request": "launch",
+      "mainClass": "Exponent",
+      "projectName": "aula01_a84f173b"
+    }
+  ]
+}
