@@ -15,6 +15,13 @@ def calculator(operation, num1, num2):
         return num1 ** num2
 
 
+def arrayManipulation (index,operations, numbers):
+    newNum = calculator(operations[index], numbers[index], numbers[index+1])
+    del operations[index]
+    del numbers[index+1]
+    del numbers[index]
+    numbers.insert(index, newNum)
+
 print("please type your operation:")
 num = ""
 op = ""
@@ -48,34 +55,18 @@ for i in range(j):
     if "*" in operations:
         print("vou *")
         index = operations.index("*")
-        newNum = calculator(operations[index], numbers[index], numbers[index+1])
-        del operations[index]
-        del numbers[index+1]
-        del numbers[index]
-        numbers.insert(index, newNum)
+        arrayManipulation(index, operations, numbers)
     elif "/" in operations:
         print("vou /")
         index = operations.index("/")
-        newNum = calculator(operations[index], numbers[index], numbers[index+1])
-        del operations[index]
-        del numbers[index+1]
-        del numbers[index]
-        numbers.insert(index, newNum)
+        arrayManipulation(index, operations, numbers)
     elif "+" in operations:
         print("vou +")
         index = operations.index("+")
-        newNum = calculator(operations[index], numbers[index], numbers[index+1])
-        del operations[index]
-        del numbers[index+1]
-        del numbers[index]
-        numbers.insert(index, newNum)
+        arrayManipulation(index, operations, numbers)
     elif "-" in operations:
         print("vou -")
         index = operations.index("-")
-        newNum = calculator(operations[index], numbers[index], numbers[index+1])
-        del operations[index]
-        del numbers[index+1]
-        del numbers[index]
-        numbers.insert(index, newNum)
+        arrayManipulation(index, operations, numbers)
 
 print(numbers)
