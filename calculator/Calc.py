@@ -21,6 +21,7 @@ op = ""
 
 numbers = []
 operations = []
+result = []
 
 line = input()
 line = line.replace(" ", "")
@@ -40,3 +41,10 @@ operations.pop()
 
 print(numbers)
 print(operations)
+
+for i in range(len(operations)):
+  newFirst = calculator(operations[i],numbers[0],numbers[1])
+  del numbers[:2]
+  numbers.insert(0, newFirst)
+
+print(numbers)
