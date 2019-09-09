@@ -42,9 +42,40 @@ operations.pop()
 print(numbers)
 print(operations)
 
-for i in range(len(operations)):
-  newFirst = calculator(operations[i],numbers[0],numbers[1])
-  del numbers[:2]
-  numbers.insert(0, newFirst)
+j = len(operations)
+
+for i in range(j):
+    if "*" in operations:
+        print("vou *")
+        index = operations.index("*")
+        newNum = calculator(operations[index], numbers[index], numbers[index+1])
+        del operations[index]
+        del numbers[index+1]
+        del numbers[index]
+        numbers.insert(index, newNum)
+    elif "/" in operations:
+        print("vou /")
+        index = operations.index("/")
+        newNum = calculator(operations[index], numbers[index], numbers[index+1])
+        del operations[index]
+        del numbers[index+1]
+        del numbers[index]
+        numbers.insert(index, newNum)
+    elif "+" in operations:
+        print("vou +")
+        index = operations.index("+")
+        newNum = calculator(operations[index], numbers[index], numbers[index+1])
+        del operations[index]
+        del numbers[index+1]
+        del numbers[index]
+        numbers.insert(index, newNum)
+    elif "-" in operations:
+        print("vou -")
+        index = operations.index("-")
+        newNum = calculator(operations[index], numbers[index], numbers[index+1])
+        del operations[index]
+        del numbers[index+1]
+        del numbers[index]
+        numbers.insert(index, newNum)
 
 print(numbers)
