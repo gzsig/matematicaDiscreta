@@ -1,3 +1,5 @@
+# https://codereview.stackexchange.com/questions/46698/small-python-calculator
+
 def is_digit(var):
     return var in ('0123456789')
 
@@ -96,8 +98,51 @@ def analyze(numbers, line):
 print("please type your operation:")
 line = input()
 if validate(line):
-    numbers = []
-    analyze(numbers, line)
-    print(numbers[0])
+    if ("(" in line) & (")" in line):
+        iOpen = []
+        # contOpen = 0
+        iClose = []
+        # contClose = 0
+        pairs = []
+        print("tenho ()")
+        arr = list(line)
+        for i in range(len(arr)):
+            if arr[i] == "(":
+                iOpen.append(i)
+                # contOpen+=1
+            if arr[i] == ")":
+                iClose.append(i)
+                # contClose += 1
+        print(iOpen)
+        print(iClose)
+
+        a=0
+        j=1
+
+        while a < len(iOpen)-1:
+            while j <len(iOpen):
+                if iOpen[j] > iClose[a]:
+                    pairs.append([iOpen[j-1],iClose[a]])
+                    del iOpen[j-1]
+                    del iClose[a]
+                j+=1
+            a += 1
+        print(pairs)
+
+        print(iOpen)
+        print(iClose)
+
+        z =0
+        iClose.reverse()
+        while z < len(iOpen):
+            pairs.append([iOpen[z],iClose[z]])
+            del iOpen[z]
+            del iClose[z]
+        print(pairs)
+
+    else:
+        numbers = []
+        analyze(numbers, line)
+        print(numbers[0])
 else:
     print("error")
