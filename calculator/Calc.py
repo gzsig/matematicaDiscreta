@@ -59,7 +59,7 @@ def calculator(numbers, operations, j):
             print("vou -")
             index = operations.index("-")
             arrayManipulation(index, operations, numbers)
-        return numbers
+    return numbers
 def analyze(numbers, line):
     num = ""
     op = ""
@@ -110,6 +110,7 @@ def innerCalc(pairs, line):
             cont += 1
         line = "".join(line)
         print("current line: " + line)
+    return line
 def handelParen(line):
         iOpen = []
         # contOpen = 0
@@ -160,13 +161,14 @@ def handelParen(line):
 
         print(pairs)
         print(line)
-        innerCalc(pairs, line)
+        return innerCalc(pairs, line)
 print("please type your operation:")
 line = input()
 if validate(line):
     if ("(" in line) & (")" in line):
         line = "("+ line + ")"
-        handelParen(line)
+        res = handelParen(line)
+        print("\n\n\n RESTPOSTA:" + res)
 
     else:
         numbers = []
