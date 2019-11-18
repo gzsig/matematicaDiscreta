@@ -1,51 +1,51 @@
 def expr(): # calculating expression
-    a = item()
+    res = item()
     global index
     global stripExpression
     while (index < len(stripExpression) and (stripExpression[index] == "+" or stripExpression[index] == "-")):
         index += 1
         if index < len(stripExpression):
             if (stripExpression[index - 1] == "+"):
-                a += item()
+                res += item()
             else:
-                a -= item()
+                res -= item()
         else:
             print("Incorrect expression: there is no number after the operator")
             exit(0)
-    return a
+    return res
 
-def item(): #calculating summand
-    a = mult()
+def item(): #calculating individual operation
+    res = mult()
     global index
     global stripExpression
     while (index < len(stripExpression) and (stripExpression[index] == "*" or stripExpression[index] == "/")):
         index += 1
         if (stripExpression[index - 1] == "*"):
-            a *= mult()
+            res *= mult()
         else:
             denominator = mult()
             try:
-                a /= denominator
+                res /= denominator
             except ZeroDivisionError:
                 print("Division by zero!")
                 exit(0)
-    return a
+    return res
 
 def mult(): #calculating multiplier
-    a = 0
+    res = 0
     global index
     global stripExpression
-    if (stripExpression[index] == "("): #calculating expression in the brackets
+    if (stripExpression[index] == "("): #calculating expression in the parentheses
         index += 1
-        a = expr()
+        res = expr()
         if index >= len(stripExpression) or stripExpression[index] != ")":
-            print("Expression doesn't have a close bracket!")
+            print("Expression doesn't have a close parentheses!")
             exit(0)
         index += 1
     else:
         if (stripExpression[index] == "-"): # checking for negative multipliers
             index += 1
-            a = (-1) * mult()
+            res = (-1) * mult()
         else:
             number = "" #extracting a number from expression adding a dor if it is a float number
             if stripExpression[index] == ".":
@@ -55,15 +55,13 @@ def mult(): #calculating multiplier
                 number += stripExpression[index]
                 index += 1
             try:
-                a = float(number)
+                res = float(number)
             except ValueError:
                 print("Incorrect number in the input = " + number)
                 exit(0)
-    return a
+    return res
 
-run = True
-
-while run:
+while True:
      try:
         expression = input()
      except EOFError:
