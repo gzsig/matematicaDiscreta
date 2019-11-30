@@ -29,9 +29,15 @@ def execute(numbers):
       b = stack.pop()
       r = b / a
       stack.append(r)
+    elif i == "^":
+      a = stack.pop()
+      b = stack.pop()
+      r = b ** a
+      stack.append(r)
     else:
       stack.append(i)
   print(stack)
+  print(stack.pop())
 
 def analyze(line):
     num = ""
@@ -42,6 +48,8 @@ def analyze(line):
     line += "z"
     line = list(line)
     print(line)
+    print(numbers)
+    print(operations)
     for i in range(len(line)):
       if(is_digit(line[i])):
         num += line[i]
@@ -58,15 +66,22 @@ def analyze(line):
             print('worng order')
             numbers.append(operations[len(operations) - 2])
             del operations[len(operations) - 2]
-        if len(operations) > 1 and operations[len(operations) - 1] == "/" or operations[len(operations) - 1] == "*":
-          print("check order: * /")
-          if operations[len(operations) - 2] == "^":
+        if len(operations) > 1 and operations[len(operations) - 1] == "/":
+          print("check order: /")
+          if operations[len(operations) - 2] == "^" or operations[len(operations) - 2] == "*":
+            print('worng order')
+            numbers.append(operations[len(operations) - 2])
+            del operations[len(operations) - 2]
+        if len(operations) > 1 and operations[len(operations) - 1] == "*":
+          print("check order: *")
+          if operations[len(operations) - 2] == "^" or operations[len(operations) - 2] == "/":
             print('worng order')
             numbers.append(operations[len(operations) - 2])
             del operations[len(operations) - 2]
     operations.pop()
     print(numbers)
     print(operations)
+    operations = operations[::-1]
     for i in operations:
       numbers.append(i)
     print(numbers)
